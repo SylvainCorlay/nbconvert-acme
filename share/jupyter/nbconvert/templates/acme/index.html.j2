@@ -12,10 +12,29 @@
     h1, h2, h3 {
       font-family: "Acme", sans-serif
     }
+    .header {
+      overflow: hidden;
+      background-color: #f1f1f1;
+      padding: 20px 10px;
+    }
+    .logo-container {
+      margin: auto;
+      width: fit-content;
+    }
   </style>
 {%- endblock html_head_css -%}
 
 {% block body_header %}
-  {{ super() }}
+  <body class="jp-Notebook theme-light" style="padding: 0; margin: 0;">
+  <div class="header">
+    <div class="logo-container">
+      {% include 'acme_logo.svg' %}
+    </div>
+  </div>
+  <div style="padding: 20px; margin: 20px;">
 {% endblock body_header %}
 
+{% block body_footer %}
+  </div>
+  </body>
+{% endblock body_footer %}
