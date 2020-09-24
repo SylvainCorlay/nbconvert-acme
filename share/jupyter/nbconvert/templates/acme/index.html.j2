@@ -2,6 +2,17 @@
 
 {%- block html_head_css -%}
   {{ super() }}
+  <style>
+    @font-face {
+      font-family: 'Acme';
+      font-style: normal;
+      font-weight: 400;
+      src: url(http://themes.googleusercontent.com/static/fonts/acme/v2/h0STFiiHJJuefGZJAxrSiA.ttf) format('truetype');
+    }
+    h1, h2, h3 {
+      font-family: "Acme", sans-serif
+    }
+  </style>
 {%- endblock html_head_css -%}
 
 {% block body_header %}
