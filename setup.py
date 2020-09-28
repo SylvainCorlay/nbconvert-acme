@@ -12,7 +12,8 @@ pjoin = os.path.join
 
 class DevelopCmd(develop):
     prefix_targets = [
-        ("nbconvert/templates", 'acme')
+        ("nbconvert/templates", 'acme'),
+        ("voila/templates", 'acme')
     ]
     def run(self):
         target_dir = os.path.join(sys.prefix, 'share', 'jupyter')
