@@ -34,19 +34,15 @@ class DevelopCmd(develop):
                 os.remove(target)
             except:
                 pass
-            #TODO: is this symbolic link needed?
             print(rel_source, '->', target)
             os.symlink(rel_source, target)
 
         super().run()
 
-###TODO Later: add relative paths of data files to data_files value of setup args
 data_files = []
-# for prefix_target, name in PREFIX_TARGETS:
-#     source = os.path.join('share', 'jupyter', prefix_target, name)
-#     for root, dirs, files in os.walk(source):
-#         root_files = [os.path.join(root, i) for i in files]
-#         data_files.append((root, root_files))
+for root, dirs, files in os.walk('share'):
+    root_files = [os.path.join(root, i) for i in files]
+    data_files.append((root, root_files))
 
 setup_args = {
     'name': 'nbconvert-flowkey',
