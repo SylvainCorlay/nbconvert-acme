@@ -5,36 +5,49 @@ This repo also includes a [sample notebook](notebooks/demo.ipynb) for demo purpo
 
 ## Installation
 
-:warning: This has been only tested on macOS 11.5.2 (with Miniconda3 installation) and within a Docker container built off `python:3.9-slim` (Linux; Debian). I would only recommend installing this within a virtual machine (e.g. Docker) until this code is properly tested / reviewed.
+:warning: This has been only tested on macOS 11.5.2 (with Miniconda3 installation) and within a Docker container built off `python:3.9-slim` (Linux; Debian). 
 
-For the time being, it is recommended to install directly from GitHub, i.e.
+To try it out, I would recommend installing the package via the provided [Docker Image](Dockerfile), and running the demo as follows:
 
 ```bash
-pip install git+https://github.com/pawlodkowski/nbconvert-flowkey.git
+#build the image
+docker build -t nbconvert-demo .
+
+#run the demo
+docker run -it --rm -v $PWD:/usr/src/myapp nbconvert-demo
 ```
 
-What will happen is that the [data files](share/jupyter/nbconvert/templates/flowkey) will be added locally at the following location:
+Then open up the generated report!
+
+```bash
+open notebooks/report.html
+```
+
+## Usage
+
+Once installed (even outside Docker), the custom template will be available to you when convert a notebook to HTML:
+
+```bash
+jupyter nbconvert notebooks/demo.ipynb --to html --no-input --output 'report.html' --template flowkey
+```
+
+## How it Works
+
+What has happened underneath the hood to make this custom template available to you is that the [data files](share/jupyter/nbconvert/templates/flowkey) in this repo
+have been installed locally (or within Docker) at the following location:
 
 ```
 <sys.prefix>/share/jupyter/nbconvert/templates/flowkey
 ```
 
 , where [sys.prefix](https://docs.python.org/3/library/sys.html#sys.prefix) specifies the directory prefix where platform-independent
-Python files are installed; by default, this is the string `/usr/local`.
-
-## Usage
-
-Once installed, the custom template will be available to you when convert a notebook to HTML:
-
-```bash
-jupyter nbconvert notebooks/demo.ipynb --to html --no-input --output 'report.html' --template flowkey
-```
-
+Python files are installed; by default, this is the string `/usr/local`. All this logic is specified in the [setup.py](setup.py) file -- 
+thanks to [Sylvain Corlay](https://github.com/SylvainCorlay/nbconvert-acme) for doing most of the heavy lifting!
 
 
 ## License
 
-This repository was heavily adapted from the original source code by [Sylvain Corlay](https://github.com/SylvainCorlay),
+As hinted earlier, this repository was heavily adapted from the original source code by [Sylvain Corlay](https://github.com/SylvainCorlay),
 and originally found from the [Jupyter Blog](https://blog.jupyter.org/the-templating-system-of-nbconvert-6-47ea781eacd2)
 written by the same author.
 
