@@ -4,10 +4,6 @@ import sys
 from setuptools import setup
 from setuptools.command.develop import develop
 
-PREFIX_TARGETS = [
-    ("nbconvert/templates", 'flowkey')
-]
-
 try:
     import jupyter_core.paths as jupyter_core_paths
 except ModuleNotFoundError:
@@ -16,6 +12,10 @@ except ModuleNotFoundError:
 
 class DevelopCmd(develop):
 
+    prefix_targets = [
+    ("nbconvert/templates", 'flowkey')
+    ]
+
     def run(self):
         target_dir = os.path.join(sys.prefix, 'share', 'jupyter')
         if jupyter_core_paths:
@@ -23,7 +23,7 @@ class DevelopCmd(develop):
             target_dir = jupyter_core_paths.jupyter_path()[1]
         target_dir = os.path.join(target_dir)
 
-        for prefix_target, name in PREFIX_TARGETS:
+        for prefix_target, name in self.prefix_targets:
             source = os.path.join('share', 'jupyter', prefix_target, name)
             target = os.path.join(target_dir, prefix_target, name)
             target_subdir = os.path.dirname(target)
