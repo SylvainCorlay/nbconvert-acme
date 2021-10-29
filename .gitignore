@@ -148,5 +148,5 @@ cython_debug/
 # demo output
 *report.html
 
-# prevent further changes to file
-*demo.ipynb
+# executed version of demo notebook
+*ex.ipynb

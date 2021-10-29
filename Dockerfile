@@ -14,5 +14,5 @@ RUN apt-get update && \
 
 RUN pip install git+https://github.com/pawlodkowski/nbconvert-flowkey.git
 
-CMD jupyter nbconvert notebooks/demo.ipynb --to notebook --output 'demo.ipynb' --execute && \
-    jupyter nbconvert notebooks/demo.ipynb --to html --no-input --output 'report.html' --template flowkey
+CMD jupyter nbconvert notebooks/demo.ipynb --to notebook --output 'ex.ipynb' --execute && \
+    jupyter nbconvert notebooks/ex.ipynb --to html --no-input --output 'report.html' --template flowkey
