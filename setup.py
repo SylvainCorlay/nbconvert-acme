@@ -45,7 +45,7 @@ for root, dirs, files in os.walk('share'):
     data_files.append((root, root_files))
 
 setup_args = {
-    'name': 'nbconvert-flowkey',
+    'name': 'nbconvert_flowkey',
     'version': '0.1.0',
     'packages': [],
     'data_files': data_files,
@@ -53,7 +53,7 @@ setup_args = {
     ],
     'author': 'Paul Wlodkowski',
     'author_email': 'paul@flowkey.com',
-    'url': 'https://github.com/pawlodkowski/nbconvert-flowkey',
+    'url': 'https://github.com/pawlodkowski/nbconvert_flowkey',
     'cmdclass': {
         'develop': DevelopCmd, #https://stackoverflow.com/a/27820612/17242197
     } if jupyter_core_paths else {},
