@@ -34,6 +34,17 @@
     .jp-mod-noOutputs {
       display: none;
     }
+    #back2toc {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        font-size: 13px;
+        background-color: black;
+        color: white;
+        padding: 10px;
+        font-weight: bold;
+        opacity: 0.5;
+    }
   </style>
 {%- endblock html_head_css -%}
 
@@ -49,8 +60,8 @@
 
 {% block body_footer %}
   </div>
-  <div class="test">
-    HELLO
+  <div id="back2toc">
+    Back to Table of Contents
   </div>
   </body>
 {% endblock body_footer %}
