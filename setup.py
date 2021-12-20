@@ -1,23 +1,26 @@
+import os
+import sys
+
 from setuptools import setup
 from setuptools.command.develop import develop
-import os
+
 try:
     import jupyter_core.paths as jupyter_core_paths
-except:
+except ModuleNotFoundError:
     jupyter_core_paths = None
 
 
-pjoin = os.path.join
-
-
 class DevelopCmd(develop):
+
     prefix_targets = [
-        ("nbconvert/templates", 'acme')
+    ("nbconvert/templates", 'flowkey')
     ]
+
     def run(self):
         target_dir = os.path.join(sys.prefix, 'share', 'jupyter')
-        if '--user' in sys.prefix:  # TODO: is there a better way to find out?
-            target_dir = jupyter_core_paths.user_dir()
+        if jupyter_core_paths:
+            #TODO: potentially brittle logic: see https://jupyter.readthedocs.io/en/latest/use/jupyter-directories.html#envvar-JUPYTER_PATH
+            target_dir = jupyter_core_paths.jupyter_path()[1]
         target_dir = os.path.join(target_dir)
 
         for prefix_target, name in self.prefix_targets:
@@ -34,8 +37,7 @@ class DevelopCmd(develop):
             print(rel_source, '->', target)
             os.symlink(rel_source, target)
 
-        super(DevelopCmd, self).run()
-
+        super().run()
 
 data_files = []
 for root, dirs, files in os.walk('share'):
@@ -43,17 +45,17 @@ for root, dirs, files in os.walk('share'):
     data_files.append((root, root_files))
 
 setup_args = {
-    'name': 'nbconvert-acme',
+    'name': 'nbconvert_flowkey',
     'version': '0.1.0',
     'packages': [],
     'data_files': data_files,
     'install_requires': [
     ],
-    'author': 'Sylvain Corlay',
-    'author_email': 'jupyter@googlegroups.com',
-    'url': 'https://github.com/SylvainCorlay/nbconvert-acme/',
+    'author': 'Paul Wlodkowski',
+    'author_email': 'paul@flowkey.com',
+    'url': 'https://github.com/pawlodkowski/nbconvert_flowkey',
     'cmdclass': {
-        'develop': DevelopCmd,
+        'develop': DevelopCmd, #https://stackoverflow.com/a/27820612/17242197
     } if jupyter_core_paths else {},
 }
 

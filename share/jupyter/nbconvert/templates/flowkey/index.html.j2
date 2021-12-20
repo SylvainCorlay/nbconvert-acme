@@ -1,0 +1,70 @@
+{%- extends 'lab/index.html.j2' -%}
+
+{%- block html_head_css -%}
+  {{ super() }}
+  <style>
+    @font-face {
+      font-family: 'inherit';
+      font-style: normal;
+      font-weight: 600;
+      font-size: x-large;
+    }
+    h1, h2, h3, h4, h5 {
+      font-family: "inherit", sans-serif
+    }
+    .header {
+      overflow: hidden;
+      background-color: #f1f1f1;
+      padding: 20px 10px;
+    }
+    .logo-container {
+      margin: auto;
+      width: fit-content;
+    }
+    .jp-OutputArea-executeResult {
+      display: flex;
+      justify-content: center;
+    }
+    [data-mime-type="text/markdown"] {
+      margin: 20px;
+    }
+    table {
+      width: auto;
+    }
+    .jp-mod-noOutputs {
+      display: none;
+    }
+    #back2toc {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      font-size: 15px;
+      background-color: black;
+      color: #F1F1F1;
+      padding: 10px;
+      font-weight: bold;
+      opacity: 0.75;
+      border-radius: 5px;
+    }
+  </style>
+{%- endblock html_head_css -%}
+
+{% block body_header %}
+  <body class="jp-Notebook theme-light" style="padding: 0; margin: 0;">
+  <div class="header">
+    <div class="logo-container">
+      {% include 'flowkey_insights.svg' %}
+    </div>
+  </div>
+  <div style="margin-left: 50px; margin-right: 50px; margin-bottom: 50px">
+{% endblock body_header %}
+
+{% block body_footer %}
+  </div>
+  <a href="#contents"> 
+    <div id="back2toc">
+      ⬆️ Back to Contents
+    </div>
+  </a>
+  </body>
+{% endblock body_footer %}
