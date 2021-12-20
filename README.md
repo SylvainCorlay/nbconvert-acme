@@ -44,6 +44,21 @@ have been installed locally (or within Docker) at the following location:
 Python files are installed; by default, this is the string `/usr/local`. All this logic is specified in the [setup.py](setup.py) file -- 
 thanks to [Sylvain Corlay](https://github.com/SylvainCorlay/nbconvert-acme) for doing most of the heavy lifting!
 
+## Limitations / Future Improvements
+
+What I would love to do is incorporate a smarter / more dynamic table of contents (TOC) feature into the 
+HTML export. The [toc2 juptyer extension](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/nbextensions/toc2/README.html)
+is very nice, but unfortunately doesn't work with `nbconvert > 6`. Attempts at building my own custom nbconvert
+exporter were not successful, and the efforts to make this HTML template backwards compatible with `nbconvert==5.6.1` are not worth the trouble.
+
+Therefore, for the time being, I built a simple, manual "nax box" button that simply hyperlinks the user back to the 
+table of contents at the top of page. The only catch is that in order for it to work, you must create a markdown
+header with an id of "`contents`", e.g.:
+
+```markdown
+## Contents<a class="anchor" id="contents"></a>:
+```
+
 
 ## License
 
